@@ -1,0 +1,26 @@
+---
+# tasks file for docker_service-dep
+- name: Install pip with apt
+  apt:
+    name: python-pip
+  become: "{{docker_service_dep_nonroot}}"
+- name: Install pip with pip
+  pip:
+    name: pip
+    state: latest
+  become: "{{docker_service_dep_nonroot}}"
+- name: Install PyYAML
+  pip:
+    name: PyYAML
+  become: "{{docker_service_dep_nonroot}}"
+- name: Install docker-compose
+  pip:
+    name: docker-compose
+  become: "{{docker_service_dep_nonroot}}"
+# Specify docker-py version due to docker-compose's bug
+# https://github.com/ansible/ansible/issues/17495
+- name: Install docker-py 1.9.0
+  pip:
+    name: docker-py
+    version: 1.9.0
+  become: "{{docker_service_dep_nonroot}}"

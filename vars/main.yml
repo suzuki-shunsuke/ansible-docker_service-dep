@@ -1,0 +1,3 @@
+---
+# vars file for docker_service-dep
+docker_service_dep_nonroot: "{{(ansible_env.HOME == '/root') | ternary('no', 'yes')}}"

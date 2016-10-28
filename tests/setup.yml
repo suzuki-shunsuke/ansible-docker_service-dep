@@ -1,0 +1,10 @@
+---
+- hosts: default
+  vars:
+    docker_service_dep_nonroot: "{{(ansible_env.HOME == '/root') | ternary('no', 'yes')}}"
+  tasks:
+  - name: Install pip
+    apt:
+      name: python-pip
+      update_cache: yes
+    become: "{{docker_service_dep_nonroot}}"
