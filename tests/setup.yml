@@ -8,3 +8,5 @@
       name: python-pip
       update_cache: yes
     become: "{{docker_service_dep_nonroot}}"
+  roles:
+  - suzuki-shunsuke.docker-ubuntu

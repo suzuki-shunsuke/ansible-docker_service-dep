@@ -1,0 +1,16 @@
+---
+- name: mkdir ~/container
+  file:
+    path: "{{ansible_env.HOME}}/container"
+    state: directory
+- name: Copy docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: "{{ansible_env.HOME}}/container"
+- name: Run docker_service
+  docker_service:
+    project_src: "{{ansible_env.HOME}}/container"
+  become: "{{nonroot}}"
+  register: result
+- debug:
+    var: result

@@ -1,5 +1,8 @@
 ---
 - include: setup.yml
 - hosts: default
+  vars:
+    nonroot: "{{(ansible_env.HOME == '/root') | ternary('no', 'yes')}}"
   roles:
   - ansible-docker_service-dep
+  - test
